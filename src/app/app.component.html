@@ -20,17 +20,24 @@
                 <p>Hallfjasdklfjldasjfldjaslfjkldasjfklasdjlkfklasdöfjkldasdfkljasdkljfkldsaj</p>
             </ng-template> -->
 
+            <div id="map">
+                    
+                </div>
+
+<div cdkOverlayOrigin #myOrigin="cdkOverlayOrigin" >test</div>
+
+<!-- <div cdkOverlayOrigin #settings="cdkOverlayOrigin" class="float-right"></div> -->
 
 
-<div cdkOverlayOrigin #myOrigin="cdkOverlayOrigin" class="container-fluid bg-dark" >test</div>
-
-<div cdkOverlayOrigin #settings="cdkOverlayOrigin" class="float-right"></div>
-
-<!-- <div id="map">
-</div> -->
 
 
-
+<ng-template cdk-portal #tortelliniTemplate="cdkPortal" >
+    <div class="bg-dark" >
+            <spagetti-panel ></spagetti-panel>
+    </div>
+    
+    
+</ng-template>
 
 
 

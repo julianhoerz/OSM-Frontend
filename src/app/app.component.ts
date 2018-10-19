@@ -27,12 +27,12 @@ export class AppComponent {
     @ViewChild('settings') settings: CdkOverlayOrigin;
     // @ViewChild('myOverlay') myOverlay: TemplatePortalDirective;
     @ViewChild(CdkOverlayOrigin) _overlayOrigin: CdkOverlayOrigin;
-
+    @ViewChild('tortelliniTemplate') tortelliniTemplate: TemplatePortalDirective;
 
     ngOnInit():void{
 
         this.openSpaghettiPanel();
-        this.openSettingsPanel();
+        //this.openSettingsPanel();
 
 
         new Map({
@@ -57,22 +57,19 @@ export class AppComponent {
         //     this.myOrigin.elementRef,
         //     {originX: 'start', originY: 'bottom'},
         //     {overlayX: 'start', overlayY: 'top'} );
-            let strategy = this.overlay.position().global().width('100%');
+        let strategy = this.overlay.position().global().right('0').bottom('auto');
         let config = new OverlayConfig({positionStrategy: strategy});
         let overlayRef = this.overlay.create(config);
 
 
-        overlayRef.attach(new ComponentPortal(SpagettiPanel, this.viewContainerRef));
+        // overlayRef.attach(new ComponentPortal(SpagettiPanel, this.viewContainerRef));
+        overlayRef.attach(this.tortelliniTemplate);
 
     }
 
 
     openSettingsPanel(){
-        let strategy = this.overlay.position()
-        .connectedTo(
-            this.settings.elementRef,
-            {originX: 'start', originY: 'bottom'},
-            {overlayX: 'start', overlayY: 'top'} );
+        let strategy = this.overlay.position().global();
 
         let config = new OverlayConfig({positionStrategy: strategy});
         let overlayRef = this.overlay.create(config);
