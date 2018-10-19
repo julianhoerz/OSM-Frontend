@@ -7,11 +7,13 @@ import { AppComponent,SpagettiPanel } from './app.component';
 import { CommonModule } from '@angular/common';
 import {PlatformModule} from '@angular/cdk/platform';
 import {PortalModule} from '@angular/cdk/portal';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SpagettiPanel
+    SpagettiPanel,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,8 @@ import {PortalModule} from '@angular/cdk/portal';
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
-    SpagettiPanel
+    SpagettiPanel,
+    SettingsComponent
     ]
 })
 export class AppModule { }

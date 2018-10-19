@@ -5,6 +5,7 @@ import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import { Overlay ,CdkOverlayOrigin, OverlayConfig} from '@angular/cdk/overlay';
 import {TemplatePortalDirective, ComponentPortal} from '@angular/cdk/portal';
+import { SettingsComponent } from './settings/settings.component';
 
 
 
@@ -22,7 +23,8 @@ export class AppComponent {
 
     constructor(private overlay: Overlay, private viewContainerRef: ViewContainerRef){}
 
-    // @ViewChild('myOrigin') myOrigin: CdkOverlayOrigin;
+    @ViewChild('myOrigin') myOrigin: CdkOverlayOrigin;
+    @ViewChild('settings') settings: CdkOverlayOrigin;
     // @ViewChild('myOverlay') myOverlay: TemplatePortalDirective;
     @ViewChild(CdkOverlayOrigin) _overlayOrigin: CdkOverlayOrigin;
 
@@ -30,6 +32,7 @@ export class AppComponent {
     ngOnInit():void{
 
         this.openSpaghettiPanel();
+        this.openSettingsPanel();
 
 
         new Map({
@@ -49,9 +52,25 @@ export class AppComponent {
 
 
     openSpaghettiPanel(){
+        // let strategy = this.overlay.position()
+        // .connectedTo(
+        //     this.myOrigin.elementRef,
+        //     {originX: 'start', originY: 'bottom'},
+        //     {overlayX: 'start', overlayY: 'top'} );
+            let strategy = this.overlay.position().global().width('100%');
+        let config = new OverlayConfig({positionStrategy: strategy});
+        let overlayRef = this.overlay.create(config);
+
+
+        overlayRef.attach(new ComponentPortal(SpagettiPanel, this.viewContainerRef));
+
+    }
+
+
+    openSettingsPanel(){
         let strategy = this.overlay.position()
         .connectedTo(
-            this._overlayOrigin.elementRef,
+            this.settings.elementRef,
             {originX: 'start', originY: 'bottom'},
             {overlayX: 'start', overlayY: 'top'} );
 
@@ -59,7 +78,7 @@ export class AppComponent {
         let overlayRef = this.overlay.create(config);
 
 
-        overlayRef.attach(new ComponentPortal(SpagettiPanel, this.viewContainerRef));
+        overlayRef.attach(new ComponentPortal(SettingsComponent, this.viewContainerRef));
 
     }
 
