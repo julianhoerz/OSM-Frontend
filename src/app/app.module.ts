@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import {PlatformModule} from '@angular/cdk/platform';
 import {PortalModule} from '@angular/cdk/portal';
 import { SettingsComponent } from './settings/settings.component';
+import {MaterialModule} from './material-module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,11 +19,14 @@ import { SettingsComponent } from './settings/settings.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+
     OverlayModule,
     A11yModule,
     CommonModule,
     PlatformModule,
-    PortalModule
+    PortalModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent],

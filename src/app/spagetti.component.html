@@ -1,5 +1,5 @@
 
-<div id="position">
+<!-- <div id="position">
  <div id="sidebar" class="mt-1 ml-1 mr-1 mb-1">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -25,4 +25,43 @@
     </nav>
 
 </div> 
-</div>
+</div> -->
+<ul class="nav flex-column ml-2 mt-2 bg-light noselect" style="width: 20rem;">
+    <li class="nav-item">
+        <!-- <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              Geräte
+            </mat-expansion-panel-header>
+          
+            <p>This is the primary content of the panel.</p>
+            <mat-divider></mat-divider>
+
+            <button mat-button class="container-fluid mt-1">Gerät hinzufügen...</button>
+
+          </mat-expansion-panel> -->
+
+          <a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Geräte
+          </a>
+          <div class="collapse" id="collapseExample">
+            <div class="card ml-4 mt-2 mr-2 mb-2" >
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item list-group-item-action" href="#">BMW<button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                  </button></li>
+                  <li class="list-group-item list-group-item-action">VW-Bus</li>
+                  <li class="list-group-item list-group-item-action">VW-Golf</li>
+                </ul>
+              </div>
+          </div>
+    </li>
+    <!-- <li class="mat-expansion-panel">
+        <span class="mat-content ml-4" href="#">Einstellungen</span>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" href="#">Einstellungen</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Ausloggen</a>
+    </li>
+  </ul>

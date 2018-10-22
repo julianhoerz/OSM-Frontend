@@ -57,7 +57,7 @@ export class AppComponent {
         //     this.myOrigin.elementRef,
         //     {originX: 'start', originY: 'bottom'},
         //     {overlayX: 'start', overlayY: 'top'} );
-        let strategy = this.overlay.position().global().right('0').bottom('auto');
+        let strategy = this.overlay.position().global().bottom('auto');
         let config = new OverlayConfig({positionStrategy: strategy});
         let overlayRef = this.overlay.create(config);
 
@@ -68,16 +68,7 @@ export class AppComponent {
     }
 
 
-    openSettingsPanel(){
-        let strategy = this.overlay.position().global();
 
-        let config = new OverlayConfig({positionStrategy: strategy});
-        let overlayRef = this.overlay.create(config);
-
-
-        overlayRef.attach(new ComponentPortal(SettingsComponent, this.viewContainerRef));
-
-    }
 
 }
 
