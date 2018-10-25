@@ -38,30 +38,57 @@
 
             <button mat-button class="container-fluid mt-1">Gerät hinzufügen...</button>
 
-          </mat-expansion-panel> -->
+        </mat-expansion-panel> -->
 
-          <a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Geräte
-          </a>
-          <div class="collapse" id="collapseExample">
+        <button class="btn btn-light nav-link container-fluid" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <div class="float-left"> Geräte</div>
+        </button>
+        <div class="collapse" id="collapseExample">
             <div class="card ml-4 mt-2 mr-2 mb-2" >
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item list-group-item-action" href="#">BMW<button type="button" class="btn btn-default" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-                  </button></li>
-                  <li class="list-group-item list-group-item-action">VW-Bus</li>
-                  <li class="list-group-item list-group-item-action">VW-Golf</li>
-                </ul>
-              </div>
-          </div>
+                <div class="btn-group-vertical border-0">
+                    <div class="btn-group border-0" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-light border-0"><div class="float-left">BMW</div></button>
+                        <button type="button" style="width: 20%;" class="btn btn-light border-0"><img src="/assets/svg/bar-chart.svg" alt="icon name"></button>
+                    </div>
+                    <div class="btn-group border-0" role="group" aria-label="First group">
+                            <button type="button" class="btn btn-light border-right"><div class="float-left">VW-Bus</div></button>
+                            <button type="button" style="width: 20%;" class="btn btn-light"><img src="/assets/svg/bar-chart.svg" alt="icon name"></button>
+                        </div>
+                        
+
+                </div>
+            </div>
+        </div>
     </li>
     <!-- <li class="mat-expansion-panel">
         <span class="mat-content ml-4" href="#">Einstellungen</span>
       </li> -->
       <li class="nav-item">
-        <a class="nav-link" href="#">Einstellungen</a>
+        <button class="btn btn-light nav-link container-fluid" href="#"><div class="float-left">Einstellungen</div></button>
     </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Ausloggen</a>
     </li>
   </ul>
+
+
+
+<!-- 
+  <li class="list-group-item" href="#">
+        BMW 
+        <button type="button" class="btn btn-default btn-sm float-right">
+                <img src="/assets/svg/bar-chart.svg" alt="icon name">
+        </button>
+         <img class="float-right img-responsive" style="height:100%" src="/assets/svg/bar-chart.svg" alt="icon name"> 
+    </li> -->
+
+    <!-- <ul class="list-group list-group-flush">
+        <li class="list-group-item" href="#">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-light">Left</button>
+                        <button type="button" class="btn btn-light">Middle</button>
+                      </div>
+        </li>
+        <li class="list-group-item list-group-item-action">VW-Bus</li>
+        <li class="list-group-item list-group-item-action">VW-Golf</li>
+    </ul> -->
