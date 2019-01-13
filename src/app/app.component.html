@@ -1,48 +1,26 @@
+<div id="map">
+    <ng-template cdk-portal #controllOverlay="cdkPortal" >
+        <div>
+            <controller #childref [currentPosition]="currentSelection" [map]="map" [vectorLayer]="vectorLayer"></controller>
+        </div>
+    </ng-template>
+
+    <!-- <div cdkOverlayOrigin #myOrigin="cdkOverlayOrigin" ></div> -->
+</div>
 
 
 
 
 
 
-<!-- <div cdkOverlayOrigin #myOrigin="cdkOverlayOrigin">Haaalllooooo</div> -->
 
-<!-- <button cdk-overlay-origin (click)="openSpaghettiPanel()">
-        Pasta 3
-</button> -->
+<!-- <span class="glyphicon glyphicon-envelope"></span> -->
 
-    <!-- <div class="cdk-overlay-container">
-            <div id="cdk-overlay-0" class="cdk-overlay-pane" dir="ltr">
-              fdasfdasfdafdafdasfdsafdasfadf
-            </div>
-          </div> -->
-
-          <!-- <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="origin" [cdkConnectedOverlayOpen]=true>
-                <p>Hallfjasdklfjldasjfldjaslfjkldasjfklasdjlkfklasdöfjkldasdfkljasdkljfkldsaj</p>
-            </ng-template> -->
-
-            <div id="map">
-                    
-                </div>
-
-<div cdkOverlayOrigin #myOrigin="cdkOverlayOrigin" ></div>
 
 <!-- <div cdkOverlayOrigin #settings="cdkOverlayOrigin" class="float-right"></div> -->
 
 
-
-
-<ng-template cdk-portal #tortelliniTemplate="cdkPortal" >
-    <div  >
-            <spagetti-panel ></spagetti-panel>
-    </div>
-    
-    
-</ng-template>
-
-<span class="glyphicon glyphicon-envelope"></span>
-
-
-
+<!-- <p> {{ myHTML }}</p> -->
 
 
 
