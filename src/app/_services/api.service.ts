@@ -21,10 +21,10 @@ export class ApiService {
         //private APIService: APIService
     {}
 
-    getTable(): Promise<Table> {
+    getTable(): Promise<string> {
         console.log("Verbindungsversuch....");
 
-        return this.http.get<Table>(this.myurl + "/api").toPromise().then(response => response as Table);
+        return this.http.get<string>("https://jsonplaceholder.typicode.com/todos/1").toPromise();
     }
 
 

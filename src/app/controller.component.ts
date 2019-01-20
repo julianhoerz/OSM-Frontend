@@ -77,6 +77,16 @@ import {Table} from './_models/table';
         }
     }
 
+
+    buildTable(){
+
+        this.ApiService.getTable()
+            .then(result => {
+                console.log(result);
+
+            });
+    }
+
     drawRoute(geojsonObject: string){
 
         var format = new GeoJSON({

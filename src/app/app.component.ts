@@ -95,7 +95,7 @@ export class AppComponent {
 
 
 
-        this.ApiService.getTable().then(result => {console.log("" + result.Name)});
+        
 
     }
 
