@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
+import { MapService } from './_services/map.service';
 
 import { AppComponent } from './app.component';
 import { Controller } from './controller.component';
@@ -31,7 +32,7 @@ import { HttpClientModule} from '@angular/common/http';
     PortalModule,
     MaterialModule
   ],
-  providers: [ApiService],
+  providers: [ApiService,MapService],
   bootstrap: [AppComponent],
   entryComponents: [
     Controller,

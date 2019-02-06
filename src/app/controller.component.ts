@@ -10,6 +10,8 @@ import { SettingsComponent } from './settings/settings.component';
 import {toLonLat} from 'ol/proj.js';
 import {ApiService} from './_services/api.service';
 import {Table} from './_models/table';
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
 
 
 
@@ -25,6 +27,10 @@ import {Table} from './_models/table';
     @Input() currentPosition: ol.Coordinates;
     @Input() map: Map;
     @Input() vectorLayer: VectorLayer;
+    @Input() vectorLayer1: VectorLayer;
+    allmarkers: Feature[] = [];
+    startmarker: Feature = null;
+    endmarker: Feature = null;
 
     constructor(private ApiService: ApiService){}
 
@@ -34,11 +40,46 @@ import {Table} from './_models/table';
                 console.log("Set Start Position");
                 this.startCoords = toLonLat(this.currentPosition);
                 console.log(this.startCoords);
+
+
+                if(this.startmarker){
+                    this.allmarkers.splice(this.allmarkers.indexOf(this.startmarker),1);
+                }
+                var point = new Point(this.currentPosition);
+                this.startmarker = new Feature(point);
+
+                this.allmarkers.push(this.startmarker);
+
+                var vectorSource = new VectorSource({
+                    features: this.allmarkers
+                });
+    
+                this.vectorLayer1.setSource(vectorSource);
+
+                this.selector = 0;
             }
             if(this.selector == 2){
                 console.log("Set End Position");
                 this.endCoords = toLonLat(this.currentPosition);
                 console.log(this.endCoords);
+
+
+                if(this.endmarker){
+                    this.allmarkers.splice(this.allmarkers.indexOf(this.endmarker),1);
+                }
+                var point = new Point(this.currentPosition);
+                this.endmarker = new Feature(point);
+
+                this.allmarkers.push(this.endmarker);
+
+                var vectorSource = new VectorSource({
+                    features: this.allmarkers
+                });
+    
+                this.vectorLayer1.setSource(vectorSource);
+
+
+                this.selector = 0;
             }
             if(this.startCoords && this.endCoords){
                 console.log("Enable Button");

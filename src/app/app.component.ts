@@ -2,8 +2,12 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } fro
 import Map from 'ol/Map';
 import View from 'ol/View';
 import Style from 'ol/style/Style';
+import Fill from 'ol/style/Fill';
+import Icon from 'ol/style/Icon';
+import CircleStyle from 'ol/style/Circle';
 import Stroke from 'ol/style/Stroke';
 import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -16,6 +20,8 @@ import { SettingsComponent } from './settings/settings.component';
 import {fromLonLat} from 'ol/proj.js';
 import {ApiService} from './_services/api.service';
 import {Table} from './_models/table';
+import { map } from 'rxjs/operators';
+import {Modify} from 'ol/interaction';
 
 
 @Component({
@@ -31,6 +37,8 @@ export class AppComponent {
     myHTML = "Hallo Welt....";
     currentSelection: Coordinates = null;
     vectorLayer: VectorLayer;
+    vectorLayer1: VectorLayer;
+    allmarkers: Feature[] = [];
 
 
     constructor(
@@ -71,6 +79,30 @@ export class AppComponent {
             updateWhileInteracting: true,
             style: styleFunction
         });
+
+
+
+
+        var source1 = new VectorSource();
+
+        var style = new Style({
+            image: new Icon({
+                anchor: [0.5, 1],
+                scale: 4,
+                src: '/assets/svg/map-marker.svg'
+            })
+        });
+
+
+        this.vectorLayer1 = new VectorLayer({
+            source: source1,
+            style: style,
+            updateWhileAnimating: true,
+            updateWhileInteracting: true
+        });
+
+
+
           
 
         this.map = new Map({
@@ -80,7 +112,8 @@ export class AppComponent {
                 new TileLayer({
                     source: new OSM()
                 }),
-                this.vectorLayer
+                this.vectorLayer,
+                this.vectorLayer1
             ],
             view: new View({
                 center: fromLonLat([9.201047,48.658488]),
@@ -89,13 +122,6 @@ export class AppComponent {
         });
 
         this.initPopup();
-        
-
-
-
-
-
-        
 
     }
 
@@ -115,6 +141,12 @@ export class AppComponent {
         this.map.on('click',evt =>{
             var feature = evt.map.getCoordinateFromPixel(evt.pixel);
             this.currentSelection = feature;
+
+
+
+
+
+
         });
     }
 
