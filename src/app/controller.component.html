@@ -22,6 +22,27 @@
                 </div>
             </div>
         </div>
+
+        <button class="btn btn-light nav-link container-fluid" data-toggle="collapse" href="#collapseMapMatching" role="button" aria-expanded="false" aria-controls="collapseMapMatching">
+            <div class="float-left">MapMatching</div>
+        </button>
+
+        <div class="collapse" id="collapseMapMatching">
+            <div class="card ml-4 mt-2 mr-2 mb-2" >
+                <div class="btn-group-vertical border-0">
+                    <div class="btn-group border-0" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-light border-0" (click)="setAdd()"><div class="float-left">Hinzufügen</div>{{startCoords}}</button>
+                    </div>
+                    <div class="btn-group border-0" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-light border-0" (click)="deleteRoute()"><div class="float-left">Löschen</div>{{endCoords}}</button>
+                    </div>
+                    <div class="btn-group border-0" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-light border-0" (click)="startMapMatching()"><div class="float-left">Match</div></button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </li><!--
     <li class="nav-item">
         <button class="btn btn-light nav-link container-fluid" (click)="buildTable()" data-toggle="collapse" href="#collapseTabelle" role="button" aria-expanded="false" aria-controls="collapseTabelle">

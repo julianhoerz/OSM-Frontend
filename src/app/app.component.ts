@@ -38,6 +38,7 @@ export class AppComponent {
     currentSelection: Coordinates = null;
     vectorLayer: VectorLayer;
     vectorLayer1: VectorLayer;
+    mapMatchingLayer: VectorLayer;
     allmarkers: Feature[] = [];
 
 
@@ -101,6 +102,13 @@ export class AppComponent {
             updateWhileInteracting: true
         });
 
+        this.mapMatchingLayer = new VectorLayer({
+            source: source1,
+            style: style,
+            updateWhileAnimating: true,
+            updateWhileInteracting: true
+        });
+
 
 
           
@@ -113,7 +121,8 @@ export class AppComponent {
                     source: new OSM()
                 }),
                 this.vectorLayer,
-                this.vectorLayer1
+                this.vectorLayer1,
+                this.mapMatchingLayer
             ],
             view: new View({
                 center: fromLonLat([9.201047,48.658488]),

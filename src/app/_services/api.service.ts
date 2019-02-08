@@ -33,6 +33,11 @@ export class ApiService {
         return this.http.get<string>(this.myurl+'/dijkstra/'+ coords).toPromise();
     }
 
+
+    postMapMatching(coords: JSON): Promise<string> {
+        return this.http.post<string>(this.myurl+"/mapmatching",coords).toPromise();
+    }
+
     private handleError(error: HttpErrorResponse) {
         console.log("Error......");
         if (error.error instanceof ErrorEvent) {

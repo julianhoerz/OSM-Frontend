@@ -21,6 +21,7 @@ import Point from 'ol/geom/Point';
     })
     export class Controller {
 
+    
     startCoords: String = null;
     endCoords: String = null;
     selector: number = 0;
@@ -28,9 +29,11 @@ import Point from 'ol/geom/Point';
     @Input() map: Map;
     @Input() vectorLayer: VectorLayer;
     @Input() vectorLayer1: VectorLayer;
+    @Input() mapMatchingLayer: VectorLayer;
     allmarkers: Feature[] = [];
     startmarker: Feature = null;
     endmarker: Feature = null;
+    mapmatchingmarker: Feature[] = [];
 
     constructor(private ApiService: ApiService){}
 
@@ -81,9 +84,60 @@ import Point from 'ol/geom/Point';
 
                 this.selector = 0;
             }
+            if(this.selector == 3){
+                console.log("Set Map Matching Position");
+                console.log(this.currentPosition);
+                
+                var point = new Point(this.currentPosition);
+                var marker = new Feature(point);
+
+                this.mapmatchingmarker.push(marker);
+
+                var vectorSource = new VectorSource({
+                    features: this.mapmatchingmarker
+                });
+    
+                this.mapMatchingLayer.setSource(vectorSource);
+            }
+
+
+
             if(this.startCoords && this.endCoords){
                 console.log("Enable Button");
             }
+        }
+    }
+
+
+    deleteRoute(){
+        console.log("Delete MapMatching Markers");
+        this.mapmatchingmarker = [];
+        this.mapMatchingLayer.setSource(new VectorSource());
+    }
+
+    startMapMatching(){
+        var coordinates = JSON.parse('{"type":"FeatureCollection","features": [{"type": "Feature","properties": {},"geometry": {"type": "LineString","coordinates": []}}]}');
+        console.log(coordinates);
+        var coordsarray = [];
+        this.mapmatchingmarker.reverse;
+        this.mapmatchingmarker.forEach(function(element){
+            coordsarray.push(toLonLat(element.getGeometry().getCoordinates()))
+        });
+        this.mapmatchingmarker.reverse;
+        coordinates.features[0].geometry.coordinates = coordsarray;
+        this.ApiService.postMapMatching(coordinates).then(response => {
+            console.log(response);
+            this.drawRoute(response);
+            return;
+        });
+    }
+
+    setAdd(){
+        if(this.selector == 3){
+            this.selector = 0;
+        }
+        else{
+            this.selector = 3;
         }
     }
 
