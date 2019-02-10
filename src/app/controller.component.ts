@@ -35,6 +35,23 @@ import Point from 'ol/geom/Point';
     endmarker: Feature = null;
     mapmatchingmarker: Feature[] = [];
 
+    sigma_standard: string = '5';
+    sigma_value: string = '';
+
+    beta_standard: string = '5';
+    beta_value: string = '';
+
+    kNN_standard: string = '10';
+    kNN_value: string = '';
+
+    startactive: string = '';
+    endactive: string = '';
+    addactive: string = '';
+
+    disableMatch: boolean = true;
+    disableDelete: boolean = true;
+    disableFindRoute: boolean = true;
+
     constructor(private ApiService: ApiService){}
 
     ngOnChanges(){
@@ -59,6 +76,7 @@ import Point from 'ol/geom/Point';
     
                 this.vectorLayer1.setSource(vectorSource);
 
+                this.startactive = "";
                 this.selector = 0;
             }
             if(this.selector == 2){
@@ -81,7 +99,7 @@ import Point from 'ol/geom/Point';
     
                 this.vectorLayer1.setSource(vectorSource);
 
-
+                this.endactive = "";
                 this.selector = 0;
             }
             if(this.selector == 3){
@@ -98,12 +116,23 @@ import Point from 'ol/geom/Point';
                 });
     
                 this.mapMatchingLayer.setSource(vectorSource);
+
+                if(this.mapmatchingmarker.length >= 1){
+                    //enable delete
+                    this.disableDelete = false;
+                    if(this.mapmatchingmarker.length >= 2){
+                        //enable matchbutton
+                        this.disableMatch = false;
+                        console.log(this.disableMatch);
+                    }
+                }
             }
 
 
 
             if(this.startCoords && this.endCoords){
                 console.log("Enable Button");
+                this.disableFindRoute = false;
             }
         }
     }
@@ -113,11 +142,43 @@ import Point from 'ol/geom/Point';
         console.log("Delete MapMatching Markers");
         this.mapmatchingmarker = [];
         this.mapMatchingLayer.setSource(new VectorSource());
+        this.disableDelete = true;
+        this.disableMatch = true;
+
+        this.vectorLayer.setSource(new VectorSource());
+        this.selector = 0;
+        this.addactive = "";
+
+
     }
 
     startMapMatching(){
+
+        this.selector = 0;
+        this.addactive = "";
+
+        var sigma = Number(this.sigma_value);
+        var beta = Number(this.beta_value);
+        var kNN = Number(this.kNN_value);
+        if(isNaN(sigma) || sigma <= 0 || sigma >= 40){
+            sigma = Number(this.sigma_standard);
+            this.sigma_value = String(sigma);
+        }
+        if(isNaN(beta) || beta <= 0 || beta >= 40){
+            beta = Number(this.beta_standard);
+            this.beta_value = String(beta);
+        }
+        if(isNaN(kNN) || kNN <= 0 || kNN >=30){
+            kNN = Number(this.kNN_standard);
+            this.kNN_value = String(kNN);
+        }
+        var params = JSON.parse('{"sigma":"", "beta":"", "kNN":""}');
+        params.sigma = sigma;
+        params.beta = beta;
+        params.kNN = kNN
+        
         var coordinates = JSON.parse('{"type":"FeatureCollection","features": [{"type": "Feature","properties": {},"geometry": {"type": "LineString","coordinates": []}}]}');
-        console.log(coordinates);
+        coordinates.features[0].properties = params;
         var coordsarray = [];
         this.mapmatchingmarker.reverse;
         this.mapmatchingmarker.forEach(function(element){
@@ -125,6 +186,8 @@ import Point from 'ol/geom/Point';
         });
         this.mapmatchingmarker.reverse;
         coordinates.features[0].geometry.coordinates = coordsarray;
+        console.log(coordinates);
+
         this.ApiService.postMapMatching(coordinates).then(response => {
             console.log(response);
             this.drawRoute(response);
@@ -135,9 +198,11 @@ import Point from 'ol/geom/Point';
     setAdd(){
         if(this.selector == 3){
             this.selector = 0;
+            this.addactive = "";
         }
         else{
             this.selector = 3;
+            this.addactive = "active";
         }
     }
 
@@ -145,18 +210,24 @@ import Point from 'ol/geom/Point';
     setStart(){
         if(this.selector == 1){
             this.selector = 0;
+            this.startactive = "";
         }
         else{
             this.selector = 1;
+            this.startactive = "active";
+            this.endactive = "";
         }
     }
 
     setEnd(){
         if(this.selector == 2){
             this.selector = 0;
+            this.endactive = "";
         }
         else{
             this.selector = 2;
+            this.endactive = "active";
+            this.startactive = "";
         }
     }
 
@@ -168,7 +239,8 @@ import Point from 'ol/geom/Point';
                     console.log(response);
                     this.drawRoute(response);
                     return;
-                });
+                }
+            );
         }
     }
 

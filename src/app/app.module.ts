@@ -14,6 +14,7 @@ import { MaterialModule} from './material-module';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ApiService} from './_services/api.service';
 import { HttpClientModule} from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HttpClientModule} from '@angular/common/http';
     CommonModule,
     PlatformModule,
     PortalModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   providers: [ApiService,MapService],
   bootstrap: [AppComponent],

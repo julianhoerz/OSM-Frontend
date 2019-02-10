@@ -1,66 +1,49 @@
 
-<ul class="nav flex-column ml-2 mt-2 bg-light noselect" style="width: 20rem;">
-    <li class="nav-item">
+    <ul class="nav ml-2 mt-2 bg-light noselect" style="width: 10rem;">
+    <li class="nav-item" style="width:100%">
 
 
-        <button class="btn btn-light nav-link container-fluid" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                <div class="float-left"> Navigation</div>
+        <button class="btn btn-primary nav-link" style="width:100%" data-toggle="collapse" href="#collapseNavigation">
+                <div class="float-left">Navigation</div>
         </button>
-        <div class="collapse" id="collapseExample">
-            <div class="card ml-4 mt-2 mr-2 mb-2" >
-                <div class="btn-group-vertical border-0">
-                    <div class="btn-group border-0" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-light border-0" (click)="setStart()"><div class="float-left">Start</div>{{startCoords}}</button>
-                    </div>
-                    <div class="btn-group border-0" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-light border-0" (click)="setEnd()"><div class="float-left">Ziel</div>{{endCoords}}</button>
-                    </div>
-                    <div class="btn-group border-0" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-light border-0" (click)="startDijkstra()"><div class="float-left">Berechne Route</div></button>
-                    </div>
 
-                </div>
-            </div>
+        <div class="collapse" id="collapseNavigation" style="width:100%">
+            <button type="button" class="btn btn-light {{startactive}}" (click)="setStart()" style="width:100%">
+                <div class="float-left">Start</div>
+            </button>
+            <button type="button" class="btn btn-light {{endactive}}" (click)="setEnd()" style="width:100%">
+                <div class="float-left">Ziel</div>
+            </button>
+            <button type="button" class="btn btn-light" [disabled]="disableFindRoute" (click)="startDijkstra()" style="width:100%">
+                <div class="float-left">Berechne Route</div>
+            </button>
         </div>
 
-        <button class="btn btn-light nav-link container-fluid" data-toggle="collapse" href="#collapseMapMatching" role="button" aria-expanded="false" aria-controls="collapseMapMatching">
+        <button class="btn btn-primary nav-link" style="width:100%" data-toggle="collapse" href="#collapseMapMatching">
             <div class="float-left">MapMatching</div>
         </button>
 
         <div class="collapse" id="collapseMapMatching">
-            <div class="card ml-4 mt-2 mr-2 mb-2" >
-                <div class="btn-group-vertical border-0">
-                    <div class="btn-group border-0" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-light border-0" (click)="setAdd()"><div class="float-left">Hinzufügen</div>{{startCoords}}</button>
-                    </div>
-                    <div class="btn-group border-0" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-light border-0" (click)="deleteRoute()"><div class="float-left">Löschen</div>{{endCoords}}</button>
-                    </div>
-                    <div class="btn-group border-0" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-light border-0" (click)="startMapMatching()"><div class="float-left">Match</div></button>
-                    </div>
 
+                <button type="button" class="btn btn-light {{addactive}}" (click)="setAdd()" style="width:100%">
+                    <div class="float-left">Hinzufügen</div>
+                </button>
+                <button type="button" class="btn btn-light" [disabled]="disableDelete"  (click)="deleteRoute()" style="width:100%">
+                    <div class="float-left">Löschen</div>
+                </button>
+                <div class="ml-3 mt-1" style="width:100%">
+                    &#963;: <input type="text" placeholder={{sigma_standard}} [(ngModel)]="sigma_value" style="width:2rem">
                 </div>
-            </div>
+                <div class="ml-3 mt-1" style="width:100%">
+                        &#946;: <input type="text" placeholder={{beta_standard}} [(ngModel)]="beta_value" style="width:2rem">
+                    </div>
+                <div class="ml-3 mt-1" style="width:100%">
+                        k-NN: <input type="text" placeholder={{kNN_standard}} [(ngModel)]="kNN_value" style="width:2rem">
+                    </div>
+                <button type="button" class="btn btn-light" [disabled]="disableMatch" (click)="startMapMatching()" style="width:100%">
+                    <div class="float-left">Match</div>
+                </button>
+        
         </div>
-    </li><!--
-    <li class="nav-item">
-        <button class="btn btn-light nav-link container-fluid" (click)="buildTable()" data-toggle="collapse" href="#collapseTabelle" role="button" aria-expanded="false" aria-controls="collapseTabelle">
-            <div class="float-left"> Tabelle</div>
-        </button>
-
-        <div class="collapse" id="collapseTabelle">
-                <mat-list>
-                    <mat-list-item >
-                        <h3 matLine> test </h3>
-                        <p matLine>
-                        <span> test </span>
-                        <span class="demo-2"> --test </span>
-                        </p>
-                    </mat-list-item>
-                    </mat-list>
-            
-        </div>
-    </li>-->
-
-  </ul>
+    </li>
+</ul>
