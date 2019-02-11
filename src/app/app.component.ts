@@ -125,7 +125,7 @@ export class AppComponent {
                 this.mapMatchingLayer
             ],
             view: new View({
-                center: fromLonLat([9.201047,48.658488]),
+                center: fromLonLat([8.792982,53.078726]),
                 zoom: 10
             })
         });
