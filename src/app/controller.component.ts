@@ -12,6 +12,8 @@ import {ApiService} from './_services/api.service';
 import {Table} from './_models/table';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
+import { TestBed } from '@angular/core/testing';
+import {fromLonLat} from 'ol/proj.js';
 
 
 
@@ -21,7 +23,8 @@ import Point from 'ol/geom/Point';
     })
     export class Controller {
 
-    
+    fileToUpload: File = null;
+    filecontent: String = "";
     startCoords: String = null;
     endCoords: String = null;
     selector: number = 0;
@@ -53,6 +56,73 @@ import Point from 'ol/geom/Point';
     disableFindRoute: boolean = true;
 
     constructor(private ApiService: ApiService){}
+
+    buildPoint(lat,lng){
+        console.log("Lat: " + lat);
+        console.log("Lng: " + lng);
+        var point = new Point(fromLonLat([lng,lat]));
+        console.log(point);
+        //this.einfachertest();
+        this.setMapmatchingPoint(new Point(fromLonLat([lng,lat])));
+    }
+
+    einfachertest(){
+        console.log("JJAAAAA");
+    }
+
+
+    handleFileInput(file){
+
+        new Promise((resolve, reject) => {
+          var fr = new FileReader();  
+          fr.onload = () => {
+            resolve(fr.result)
+          };
+          fr.readAsText(file.item(0));
+        }).then(thiscontent => {
+            var parts = (thiscontent+"").split(";");
+            if(parts.length <= 0){
+                console.log("Wrong File...");
+            }
+            else{
+                for(var i = 0; i< parts.length; i ++){
+                    var point = JSON.parse(parts[i]);
+                    this.buildPoint(point.lat,point.lng);
+                }
+            }
+        })
+      }
+
+    handleFileeInput(files: FileList) {
+
+        function buildPoint(lat,lng){
+            console.log("Lat: " + lat);
+            console.log("Lng: " + lng);
+            var point = new Point(fromLonLat([lng,lat]));
+            console.log(point);
+            this.einfachertest();
+            //this.setMapmatchingPoint(new Point(fromLonLat([lng,lat])));
+        }
+
+        this.fileToUpload = files.item(0);
+        var fileReader = new FileReader();
+        fileReader.onload = function(e) {
+            var thiscontent = fileReader.result + "";
+            var parts = thiscontent.split(";");
+            if(parts.length <= 0){
+                console.log("Wrong File...");
+            }
+            else{
+                for(var i = 0; i< parts.length; i ++){
+                    var point = JSON.parse(parts[i]);
+                    buildPoint(point.lat,point.lng);
+                }
+            }
+        };
+        fileReader.readAsText(this.fileToUpload);
+        
+    }
+
 
     ngOnChanges(){
         if(this.currentPosition){
@@ -106,26 +176,7 @@ import Point from 'ol/geom/Point';
                 console.log("Set Map Matching Position");
                 console.log(this.currentPosition);
                 
-                var point = new Point(this.currentPosition);
-                var marker = new Feature(point);
-
-                this.mapmatchingmarker.push(marker);
-
-                var vectorSource = new VectorSource({
-                    features: this.mapmatchingmarker
-                });
-    
-                this.mapMatchingLayer.setSource(vectorSource);
-
-                if(this.mapmatchingmarker.length >= 1){
-                    //enable delete
-                    this.disableDelete = false;
-                    if(this.mapmatchingmarker.length >= 2){
-                        //enable matchbutton
-                        this.disableMatch = false;
-                        console.log(this.disableMatch);
-                    }
-                }
+                this.setMapmatchingPoint(new Point(this.currentPosition));
             }
 
 
@@ -133,6 +184,29 @@ import Point from 'ol/geom/Point';
             if(this.startCoords && this.endCoords){
                 console.log("Enable Button");
                 this.disableFindRoute = false;
+            }
+        }
+    }
+
+
+    setMapmatchingPoint(point: Point){
+        var marker = new Feature(point);
+
+        this.mapmatchingmarker.push(marker);
+
+        var vectorSource = new VectorSource({
+            features: this.mapmatchingmarker
+        });
+
+        this.mapMatchingLayer.setSource(vectorSource);
+
+        if(this.mapmatchingmarker.length >= 1){
+            //enable delete
+            this.disableDelete = false;
+            if(this.mapmatchingmarker.length >= 2){
+                //enable matchbutton
+                this.disableMatch = false;
+                console.log(this.disableMatch);
             }
         }
     }

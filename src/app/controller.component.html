@@ -28,6 +28,9 @@
                 <button type="button" class="btn btn-light {{addactive}}" (click)="setAdd()" style="width:100%">
                     <div class="float-left">Hinzufügen</div>
                 </button>
+                <input type="file"
+                    id="file"
+                    (change)="handleFileInput($event.target.files)">
                 <button type="button" class="btn btn-light" [disabled]="disableDelete"  (click)="deleteRoute()" style="width:100%">
                     <div class="float-left">Löschen</div>
                 </button>

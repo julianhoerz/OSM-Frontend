@@ -15,6 +15,7 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ApiService} from './_services/api.service';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { FileService} from './_services/file.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     FormsModule
   ],
-  providers: [ApiService,MapService],
+  providers: [ApiService,MapService,FileService],
   bootstrap: [AppComponent],
   entryComponents: [
     Controller,
