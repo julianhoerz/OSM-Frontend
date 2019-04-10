@@ -66,12 +66,11 @@ import {fromLonLat} from 'ol/proj.js';
         this.setMapmatchingPoint(new Point(fromLonLat([lng,lat])));
     }
 
-    einfachertest(){
-        console.log("JJAAAAA");
-    }
 
 
     handleFileInput(file){
+
+        this.deleteRoute();
 
         new Promise((resolve, reject) => {
           var fr = new FileReader();  
